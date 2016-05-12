@@ -14,7 +14,8 @@ import scala.Tuple2;
 public class Main {
 
     /**
-     * 全都道府県の郵便番号情報CSVより、 2行目のデータ(（旧）郵便番号)が一致するレコード数一覧を取得する。 【前準備】
+     * 全都道府県の郵便番号情報CSVより、 2行目のデータ(（旧）郵便番号)が一致するレコード数一覧を取得する。 
+     * 【前準備】
      * 下記のURLより、全都道府県の郵便番号情報CSVを取得し、 プロジェクトルートに格納する。
      * http://www.post.japanpost.jp/zipcode/dl/oogaki/zip/ken_all.zip
      *
