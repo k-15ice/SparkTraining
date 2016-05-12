@@ -4,7 +4,6 @@ import org.apache.spark.SparkConf;
 import org.apache.spark.api.java.JavaPairRDD;
 import org.apache.spark.api.java.JavaRDD;
 import org.apache.spark.api.java.JavaSparkContext;
-import org.apache.spark.api.java.function.PairFunction;
 import scala.Tuple2;
 
 /**
@@ -36,13 +35,8 @@ public class Main {
         JavaRDD<String> PostalCodes = logData.map(x -> x.split(",")[1]);
         
         // 旧郵便番号が一致するレコード数を取得する。
-        // TODO: PairFunctionをラムダ式にしたい・・・
         JavaPairRDD<String, Integer> counts = PostalCodes.mapToPair(
-                new PairFunction<String, String, Integer>(){
-                    public Tuple2<String, Integer> call(String x){
-                        return new Tuple2(x, 1);
-                    }
-                }).reduceByKey((x, y) -> x + y);
+                x -> new Tuple2(x, 1)).reduceByKey((x, y) -> (int)x + (int)y);
         
         // プロジェクトルートに"output"フォルダを作成し、結果ファイルを出力する。
         // ※実行時に"output"フォルダが残っているとエラーになるため毎回削除してください。
